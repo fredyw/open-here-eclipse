@@ -9,6 +9,7 @@
 package org.fredy.openhere.ui.preferences;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.fredy.openhere.ui.Activator;
@@ -18,7 +19,9 @@ import org.fredy.openhere.ui.Activator;
  */
 public class OpenHerePreferencePage extends FieldEditorPreferencePage implements
     IWorkbenchPreferencePage {
-
+    public static final String CONSOLE_CMD = "consoleCommand";
+    public static final String FILE_BROWSER_CMD = "fileBrowserCommand";
+    
     public OpenHerePreferencePage() {
         super(GRID);
     }
@@ -30,7 +33,9 @@ public class OpenHerePreferencePage extends FieldEditorPreferencePage implements
 
     @Override
     protected void createFieldEditors() {
-        // TODO Auto-generated method stub
-        
+        addField(new StringFieldEditor("consoleCommand", "Console command",
+            getFieldEditorParent()));
+        addField(new StringFieldEditor("fileBrowserCommand", "File browser command",
+            getFieldEditorParent()));
     }
 }

@@ -67,6 +67,43 @@
                </visibleWhen>
             </command>
          </menu>
+         <menu
+               label="Open Here">
+            <command
+                  commandId="org.fredy.openhere.ui.commands.openConsole"
+                  label="Console"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <with
+                        variable="activeMenuEditorInput">
+                     <iterate
+                           ifEmpty="false">
+                        <adapt
+                              type="org.eclipse.ui.IEditorInput">
+                        </adapt>
+                     </iterate>
+                  </with>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.fredy.openhere.ui.commands.openFileBrowser"
+                  label="File Browser"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <with
+                        variable="activeMenuEditorInput">
+                     <iterate
+                           ifEmpty="false">
+                        <adapt
+                              type="org.eclipse.ui.IEditorInput">
+                        </adapt>
+                     </iterate>
+                  </with>
+               </visibleWhen>
+            </command>
+         </menu>
       </menuContribution>
    </extension>
    <extension

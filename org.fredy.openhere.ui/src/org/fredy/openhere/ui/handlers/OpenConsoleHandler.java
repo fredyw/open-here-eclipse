@@ -8,17 +8,21 @@
  */
 package org.fredy.openhere.ui.handlers;
 
-import org.eclipse.core.commands.AbstractHandler;
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.fredy.openhere.ui.Activator;
+import org.fredy.openhere.ui.preferences.OpenHerePreferencePage;
+import org.osgi.service.prefs.Preferences;
 
 /**
+ * This handler is responsible for opening a console.
+ * 
  * @author fredy
  */
-public class OpenConsoleHandler extends AbstractHandler {
+public class OpenConsoleHandler extends OpenHereHandler {
     @Override
-    public Object execute(ExecutionEvent event) throws ExecutionException {
-        // TODO Auto-generated method stub
-        return null;
+    protected String getCommand() {
+        // TODO: exception handling when auto detection fails
+        Preferences preferences = InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID);
+        return preferences.get(OpenHerePreferencePage.CONSOLE_CMD, "");
     }
 }
