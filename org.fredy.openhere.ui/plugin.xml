@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.fredy.openhere.ui.handlers.OpenConsoleHandler"
+            commandId="org.fredy.openhere.ui.commands.openConsole">
+      </handler>
+      <handler
+            class="org.fredy.openhere.ui.handlers.OpenFileBrowserHandler"
+            commandId="org.fredy.openhere.ui.commands.openFileBrowser">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Open Console"
+            id="org.fredy.openhere.ui.commands.openConsole"
+            name="Open Console">
+      </command>
+      <command
+            description="Open File Browser"
+            id="org.fredy.openhere.ui.commands.openFileBrowser"
+            name="Open File Browser">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               label="Open Here">
+            <command
+                  commandId="org.fredy.openhere.ui.commands.openConsole"
+                  label="Console"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <with
+                        variable="selection">
+                     <iterate
+                           ifEmpty="false">
+                        <adapt
+                              type="org.eclipse.core.resources.IResource">
+                        </adapt>
+                     </iterate>
+                  </with>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.fredy.openhere.ui.commands.openFileBrowser"
+                  label="File Browser"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <with
+                        variable="selection">
+                     <iterate
+                           ifEmpty="false">
+                        <adapt
+                              type="org.eclipse.core.resources.IResource">
+                        </adapt>
+                     </iterate>
+                  </with>
+               </visibleWhen>
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.fredy.openhere.ui.preferences.OpenHerePreferencePage"
+            id="org.fredy.openhere.ui.preferencePages.openHere"
+            name="Open Here">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.fredy.openhere.ui.commands.openConsole"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+9">
+      </key>
+      <key
+            commandId="org.fredy.openhere.ui.commands.openFileBrowser"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+0">
+      </key>
+   </extension>
+
+</plugin>
