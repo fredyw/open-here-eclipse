@@ -9,39 +9,22 @@
 package org.fredy.openhere.core;
 
 /**
- * This enum provides the list of commands in each operating sytem.
- * 
  * @author fredy
  */
-public enum OSCommand {
-    LINUX(
-        new FileBrowserCommand(""),
-        new ConsoleCommand("")
-    ),
+public class OSCommand {
+    private final String consoleCommand;
+    private final String fileBrowserCommand;
     
-    WINDOWS(
-        new FileBrowserCommand("explorer.exe \"${path}\""),
-        new ConsoleCommand("cmd.exe /c start /d \"${path}\"")
-    ),
-    
-    OSX(
-        new FileBrowserCommand(""),
-        new ConsoleCommand("")
-    );
- 
-    private FileBrowserCommand fbc;
-    private ConsoleCommand cc;
-    
-    private OSCommand(FileBrowserCommand fbc, ConsoleCommand cc) {
-        this.fbc = fbc;
-        this.cc = cc;
+    public OSCommand(String consoleCommand, String fileBrowserCommand) {
+        this.consoleCommand = consoleCommand;
+        this.fileBrowserCommand = fileBrowserCommand;
     }
     
-    public FileBrowserCommand getFileBrowserCommand() {
-        return fbc;
+    public String getConsoleCommand() {
+        return consoleCommand;
     }
     
-    public ConsoleCommand getConsoleCommand() {
-        return cc;
+    public String getFileBrowserCommand() {
+        return fileBrowserCommand;
     }
 }

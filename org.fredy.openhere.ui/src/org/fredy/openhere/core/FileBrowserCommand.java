@@ -12,13 +12,13 @@ package org.fredy.openhere.core;
  * @author fredy
  */
 public class FileBrowserCommand {
-    private final String command;
+    private final String[] commands;
 
-    public FileBrowserCommand(String command) {
-        this.command = command;
+    public FileBrowserCommand(String... commands) {
+        this.commands = commands;
     }
     
-    public String getCommand() {
-        return command;
+    public String[] getCommands() {
+        return commands;
     }
 }

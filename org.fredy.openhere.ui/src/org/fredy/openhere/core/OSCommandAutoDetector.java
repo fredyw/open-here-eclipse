@@ -26,10 +26,27 @@ public class OSCommandAutoDetector {
      */
     public static OSCommand detect() {
         if (System.getProperty(OS_NAME_PROP).toLowerCase().startsWith("win")) {
-            return OSCommand.WINDOWS;
+            return detectWindows();
         } else {
             // TODO: fix it later
             throw new RuntimeException("OS is not supported");
         }
+    }
+    
+    private static OSCommand detectWindows() {
+        String cc = OSCommandFactory.WINDOWS.getConsoleCommand().getCommands()[0];
+        String fbc = OSCommandFactory.WINDOWS.getFileBrowserCommand().getCommands()[0];
+        
+        return new OSCommand(cc, fbc);
+    }
+    
+    private static OSCommand detectLinux() {
+        // TODO: to be implemented
+        return null;
+    }
+    
+    private static OSCommand detectOSX() {
+        // TODO: to be implemented
+        return null;
     }
 }

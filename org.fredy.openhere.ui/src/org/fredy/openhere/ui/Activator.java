@@ -44,13 +44,13 @@ public class Activator extends AbstractUIPlugin {
 		Preferences preferences = InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID);
         String cc = preferences.get(OpenHerePreferencePage.CONSOLE_CMD, "");
         if (cc.isEmpty()) {
-            cc = osCmd.getConsoleCommand().getCommand();
+            cc = osCmd.getConsoleCommand();
             preferences.put(OpenHerePreferencePage.CONSOLE_CMD, cc);
         }
         
         String fbc = preferences.get(OpenHerePreferencePage.FILE_BROWSER_CMD, "");
         if (fbc.isEmpty()) {
-            fbc = osCmd.getFileBrowserCommand().getCommand();
+            fbc = osCmd.getFileBrowserCommand();
             preferences.put(OpenHerePreferencePage.FILE_BROWSER_CMD, fbc);
         }
 	}

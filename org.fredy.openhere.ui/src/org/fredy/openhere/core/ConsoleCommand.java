@@ -12,13 +12,13 @@ package org.fredy.openhere.core;
  * @author fredy
  */
 public class ConsoleCommand {
-    private final String command;
+    private final String[] commands;
     
-    public ConsoleCommand(String command) {
-        this.command = command;
+    public ConsoleCommand(String... commands) {
+        this.commands = commands;
     }
     
-    public String getCommand() {
-        return command;
+    public String[] getCommands() {
+        return commands;
     }
 }
