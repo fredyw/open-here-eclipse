@@ -14,9 +14,18 @@ package org.fredy.openhere.core;
  * @author fredy
  */
 public enum OSCommandFactory {
+    // TODO: need kde, cinnamon, lxde 
     LINUX(
-        new FileBrowserCommand(""),
-        new ConsoleCommand("")
+        new FileBrowserCommand(
+            "thunar ${path}", // xfce,
+            "nautilus ${path}", // gnome
+            "caja ${path}" // mate
+            ),
+        new ConsoleCommand(
+            "exo-open --launch TerminalEmulator --working-directory=${path}", // xfce
+            "gnome-terminal ${path}", // gnome
+            "mate-terminal ${path}" // mate
+            )
     ),
     
     WINDOWS(
@@ -24,6 +33,7 @@ public enum OSCommandFactory {
         new ConsoleCommand("cmd.exe /c start /d \"${path}\"")
     ),
     
+    // TODO: need OSX
     OSX(
         new FileBrowserCommand(""),
         new ConsoleCommand("")

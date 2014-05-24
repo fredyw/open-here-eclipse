@@ -8,6 +8,10 @@
  */
 package org.fredy.openhere.core;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 /**
  * This class auto-detects the OS and returns an corresponding OSCommand.
  * 
@@ -27,6 +31,8 @@ public class OSCommandAutoDetector {
     public static OSCommand detect() {
         if (System.getProperty(OS_NAME_PROP).toLowerCase().startsWith("win")) {
             return detectWindows();
+        } else if (System.getProperty(OS_NAME_PROP).toLowerCase().contains("linux")) {
+            return detectLinux();
         } else {
             return null;
         }
@@ -40,12 +46,71 @@ public class OSCommandAutoDetector {
     }
     
     private static OSCommand detectLinux() {
-        // TODO: to be implemented
-        return null;
+        String cc = "";
+        for (String cmd : OSCommandFactory.LINUX.getConsoleCommand().getCommands()) {
+            String output = execCommand("which", cmd.split("\\s+")[0]);
+            if (!output.isEmpty()) {
+                cc = cmd;
+                break;
+            }
+        }
+        
+        String fbc = "";
+        for (String cmd : OSCommandFactory.LINUX.getFileBrowserCommand().getCommands()) {
+            String output = execCommand("which", cmd.split("\\s+")[0]);
+            if (!output.isEmpty()) {
+                fbc = cmd;
+                break;
+            }
+        }
+        return new OSCommand(cc, fbc);
     }
     
     private static OSCommand detectOSX() {
         // TODO: to be implemented
         return null;
+    }
+    
+    private static class StreamGobbler extends Thread {
+        private InputStream is;
+        private StringBuilder output = new StringBuilder();
+        
+        public StreamGobbler(InputStream is) {
+            this.is = is;
+        }
+        
+        public String getOutput() {
+            return output.toString();
+        }
+        
+        @Override
+        public void run() {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+                String line = br.readLine();
+                output.append(line);
+                while ((line = br.readLine()) != null) {
+                    output.append(line);
+                }
+            } catch (Exception e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+    
+    private static String execCommand(String... command) {
+        ProcessBuilder pb = new ProcessBuilder(command);
+        Process p;
+        try {
+            p = pb.start();
+            StreamGobbler sb = new StreamGobbler(p.getInputStream());
+            sb.start();
+            // TODO: exit code???
+            p.waitFor();
+            sb.join();
+            return sb.getOutput();
+        } catch (Exception e) {
+            // ignore the exception
+        }
+        return "";
     }
 }
