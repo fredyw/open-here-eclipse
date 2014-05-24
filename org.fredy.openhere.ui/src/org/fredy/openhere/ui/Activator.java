@@ -39,8 +39,10 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		
-		// TODO: exception handling
 		OSCommand osCmd = OSCommandAutoDetector.detect();
+		if (osCmd == null) {
+		    return;
+		}
 		Preferences preferences = InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID);
         String cc = preferences.get(OpenHerePreferencePage.CONSOLE_CMD, "");
         if (cc.isEmpty()) {

@@ -8,7 +8,6 @@
  */
 package org.fredy.openhere.core;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -49,16 +48,31 @@ public class ProcessLauncher {
      * 
      * @param command the process
      */
-    public static boolean launch(String command, String path) {
+    public static void launch(String command, String path) {
         String[] cmd = buildCommand(command, path);
         ProcessBuilder pb = new ProcessBuilder(cmd);
         try {
             Process p = pb.start();
-            return p.waitFor() == 0;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+//            if (p.waitFor() != 0) {
+//                throw new ProcessLauncherException(
+//                    join(cmd) + " returned " + p.exitValue() + " exit code");
+//            }
+        } catch (Exception e) {
+            throw new ProcessLauncherException(e);
         }
+    }
+    
+    private static String join(String[] strings) {
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        for (String str : strings) {
+            if (i == 0) {
+                sb.append(str);
+            } else {
+                sb.append(" ").append(str);
+            }
+            i++;
+        }
+        return sb.toString();
     }
 } 

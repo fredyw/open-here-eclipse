@@ -21,8 +21,12 @@ import org.osgi.service.prefs.Preferences;
 public class OpenFileBrowserHandler extends OpenHereHandler {
     @Override
     protected String getCommand() {
-        // TODO: exception handling when auto detection fails
         Preferences preferences = InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID);
         return preferences.get(OpenHerePreferencePage.FILE_BROWSER_CMD, "");
+    }
+
+    @Override
+    protected String getType() {
+        return "File Browser";
     }
 }

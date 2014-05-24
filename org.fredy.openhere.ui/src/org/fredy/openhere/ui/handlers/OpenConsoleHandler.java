@@ -21,8 +21,12 @@ import org.osgi.service.prefs.Preferences;
 public class OpenConsoleHandler extends OpenHereHandler {
     @Override
     protected String getCommand() {
-        // TODO: exception handling when auto detection fails
         Preferences preferences = InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID);
         return preferences.get(OpenHerePreferencePage.CONSOLE_CMD, "");
+    }
+
+    @Override
+    protected String getType() {
+        return "Console";
     }
 }

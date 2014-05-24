@@ -22,14 +22,13 @@ public class OSCommandAutoDetector {
     /**
      * Auto detects the OS and returns an OSCommand.
      * 
-     * @return the OSCommand
+     * @return the OSCommand or null if the auto detection fails
      */
     public static OSCommand detect() {
         if (System.getProperty(OS_NAME_PROP).toLowerCase().startsWith("win")) {
             return detectWindows();
         } else {
-            // TODO: fix it later
-            throw new RuntimeException("OS is not supported");
+            return null;
         }
     }
     
