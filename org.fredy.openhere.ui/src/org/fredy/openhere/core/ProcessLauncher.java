@@ -53,10 +53,11 @@ public class ProcessLauncher {
         ProcessBuilder pb = new ProcessBuilder(cmd);
         try {
             Process p = pb.start();
-//            if (p.waitFor() != 0) {
-//                throw new ProcessLauncherException(
-//                    join(cmd) + " returned " + p.exitValue() + " exit code");
-//            }
+            // TODO: fix this
+            // if (p.waitFor() != 0) {
+            //     throw new ProcessLauncherException(
+            //         join(cmd) + " returned " + p.exitValue() + " exit code");
+            // }
         } catch (Exception e) {
             throw new ProcessLauncherException(e);
         }

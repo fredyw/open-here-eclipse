@@ -31,8 +31,10 @@ public class OSCommandAutoDetector {
     public static OSCommand detect() {
         if (System.getProperty(OS_NAME_PROP).toLowerCase().startsWith("win")) {
             return detectWindows();
-        } else if (System.getProperty(OS_NAME_PROP).toLowerCase().contains("linux")) {
+        } else if (System.getProperty(OS_NAME_PROP).toLowerCase().startsWith("linux")) {
             return detectLinux();
+        } else if (System.getProperty(OS_NAME_PROP).toLowerCase().startsWith("mac")) {
+            return detectOSX();
         } else {
             return null;
         }
@@ -67,8 +69,10 @@ public class OSCommandAutoDetector {
     }
     
     private static OSCommand detectOSX() {
-        // TODO: to be implemented
-        return null;
+        String cc = OSCommandFactory.OSX.getConsoleCommand().getCommands()[0];
+        String fbc = OSCommandFactory.OSX.getFileBrowserCommand().getCommands()[0];
+        
+        return new OSCommand(cc, fbc);
     }
     
     private static class StreamGobbler extends Thread {
@@ -104,7 +108,6 @@ public class OSCommandAutoDetector {
             p = pb.start();
             StreamGobbler sb = new StreamGobbler(p.getInputStream());
             sb.start();
-            // TODO: exit code???
             p.waitFor();
             sb.join();
             return sb.getOutput();
