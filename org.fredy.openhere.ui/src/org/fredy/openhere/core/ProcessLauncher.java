@@ -52,8 +52,9 @@ public class ProcessLauncher {
         String[] cmd = buildCommand(command, path);
         ProcessBuilder pb = new ProcessBuilder(cmd);
         try {
-            Process p = pb.start();
-            // TODO: fix this
+            pb.start();
+            
+            // Process p = pb.start();
             // if (p.waitFor() != 0) {
             //     throw new ProcessLauncherException(
             //         join(cmd) + " returned " + p.exitValue() + " exit code");
@@ -63,17 +64,17 @@ public class ProcessLauncher {
         }
     }
     
-    private static String join(String[] strings) {
-        StringBuilder sb = new StringBuilder();
-        int i = 0;
-        for (String str : strings) {
-            if (i == 0) {
-                sb.append(str);
-            } else {
-                sb.append(" ").append(str);
-            }
-            i++;
-        }
-        return sb.toString();
-    }
+    // private static String join(String[] strings) {
+    //     StringBuilder sb = new StringBuilder();
+    //     int i = 0;
+    //     for (String str : strings) {
+    //         if (i == 0) {
+    //             sb.append(str);
+    //         } else {
+    //             sb.append(" ").append(str);
+    //         }
+    //         i++;
+    //     }
+    //     return sb.toString();
+    // }
 } 
