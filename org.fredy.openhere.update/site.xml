@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.fredy.openhere.feature_1.0.0.jar" id="org.fredy.openhere.feature" version="1.0.0">
+      <category name="org.fredy.openhere.category"/>
+   </feature>
+   <category-def name="org.fredy.openhere.category" label="open-here-eclipse"/>
+</site>
