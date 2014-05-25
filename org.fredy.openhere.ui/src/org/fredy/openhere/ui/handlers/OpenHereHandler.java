@@ -9,6 +9,7 @@
 package org.fredy.openhere.ui.handlers;
 
 import java.io.File;
+import java.lang.reflect.Method;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -18,7 +19,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -70,8 +70,14 @@ public abstract class OpenHereHandler extends AbstractHandler {
                 Object obj = structuredSelection.getFirstElement();
                 if (obj instanceof IResource) {
                     resource = (IResource) obj;
-                } else if (obj instanceof IJavaElement) {
-                    resource = ((IJavaElement) obj).getResource();
+                } else {
+                    // a hackish way to support many different types of projects
+                    try {
+                        Method m = obj.getClass().getMethod("getResource");
+                        resource = (IResource) m.invoke(obj);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 
                 if (resource != null) {
