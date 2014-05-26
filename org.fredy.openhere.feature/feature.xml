@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.fredy.openhere.feature"
-      label="open-here-eclipse"
+      label="Open-Here-Eclipse"
       version="1.0.0">
 
    <description url="https://github.com/fredyw/open-here-eclipse">

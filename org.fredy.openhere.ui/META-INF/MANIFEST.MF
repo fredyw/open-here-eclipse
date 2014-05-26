@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: open-here-eclipse
+Bundle-Name: Open-Here-Eclipse
 Bundle-SymbolicName: org.fredy.openhere.ui;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: org.fredy.openhere.ui.Activator
