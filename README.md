@@ -1,7 +1,9 @@
 Open-Here-Eclipse
 =================
 
-An Eclipse plugin to open console and file browser. This plugin supports Windows, Mac OSX, and Linux (Gnome, KDE, XFCE, MATE, Cinnamon, and LXDE). This plugin also allows specifying custom console and file browser commands in the Windows -> Preferences -> Open Here.
+An Eclipse plugin to open console and file browser.
+
+This plugin supports Windows, Mac OSX, and Linux (Gnome, KDE, XFCE, MATE, Cinnamon, and LXDE). This plugin also allows specifying custom console and file browser commands in the Windows -> Preferences -> Open Here.
 
 Update Site
 -----------
