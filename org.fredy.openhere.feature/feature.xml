@@ -2,7 +2,7 @@
 <feature
       id="org.fredy.openhere.feature"
       label="Open-Here-Eclipse"
-      version="1.0.0">
+      version="1.0.1">
 
    <description url="https://github.com/fredyw/open-here-eclipse">
       An Eclipse plugin to open console and file browser
