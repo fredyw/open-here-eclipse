@@ -5,6 +5,12 @@ An Eclipse plugin to open console and file browser.
 
 This plugin supports Windows, Mac OSX, and Linux (Gnome, KDE, XFCE, MATE, Cinnamon, and LXDE). This plugin also allows specifying custom console and file browser commands in the Windows -> Preferences -> Open Here.
 
+Minimum Requirements
+--------------------
+Java 7 or higher
+
+Eclipse 3.8 (Kepler) or higher
+
 Update Site
 -----------
 http://fredyw.github.io/open-here-eclipse/updates
