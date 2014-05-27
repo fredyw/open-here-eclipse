@@ -7,9 +7,8 @@ This plugin supports Windows, Mac OSX, and Linux (Gnome, KDE, XFCE, MATE, Cinnam
 
 Minimum Requirements
 --------------------
-Java 7 or higher
-
-Eclipse 3.8 (Kepler) or higher
+- Java 7 or higher
+- Eclipse 3.8 (Kepler) or higher
 
 Update Site
 -----------
