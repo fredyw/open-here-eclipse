@@ -50,8 +50,8 @@ public class OSCommandAutoDetector {
     private static OSCommand detectLinux() {
         String cc = "";
         for (String cmd : OSCommandFactory.LINUX.getConsoleCommand().getCommands()) {
-            String output = execCommand("which", cmd.split("\\s+")[0]);
-            if (!output.isEmpty()) {
+            boolean found = execCommand("which", cmd.split("\\s+")[0]);
+            if (found) {
                 cc = cmd;
                 break;
             }
@@ -59,8 +59,8 @@ public class OSCommandAutoDetector {
         
         String fbc = "";
         for (String cmd : OSCommandFactory.LINUX.getFileBrowserCommand().getCommands()) {
-            String output = execCommand("which", cmd.split("\\s+")[0]);
-            if (!output.isEmpty()) {
+            boolean found = execCommand("which", cmd.split("\\s+")[0]);
+            if (found) {
                 fbc = cmd;
                 break;
             }
@@ -77,23 +77,15 @@ public class OSCommandAutoDetector {
     
     private static class StreamGobbler extends Thread {
         private InputStream is;
-        private StringBuilder output = new StringBuilder();
         
         public StreamGobbler(InputStream is) {
             this.is = is;
         }
         
-        public String getOutput() {
-            return output.toString();
-        }
-        
         @Override
         public void run() {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-                String line = br.readLine();
-                output.append(line);
-                while ((line = br.readLine()) != null) {
-                    output.append(line);
+                while (br.readLine() != null) {
                 }
             } catch (Exception e) {
                 Thread.currentThread().interrupt();
@@ -101,19 +93,20 @@ public class OSCommandAutoDetector {
         }
     }
     
-    private static String execCommand(String... command) {
+    private static boolean execCommand(String... command) {
         ProcessBuilder pb = new ProcessBuilder(command);
+        pb.redirectErrorStream(true);
         Process p;
         try {
             p = pb.start();
             StreamGobbler sb = new StreamGobbler(p.getInputStream());
             sb.start();
-            p.waitFor();
+            int exitCode = p.waitFor();
             sb.join();
-            return sb.getOutput();
+            return exitCode == 0;
         } catch (Exception e) {
             // ignore the exception
         }
-        return "";
+        return false;
     }
 }

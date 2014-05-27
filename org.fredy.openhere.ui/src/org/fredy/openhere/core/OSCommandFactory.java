@@ -25,10 +25,9 @@ public enum OSCommandFactory {
         ),
         new ConsoleCommand(
             "exo-open --launch TerminalEmulator --working-directory=${path}", // xfce
-            "gnome-terminal ${path}", // gnome
+            "gnome-terminal --working-directory=${path}", // gnome or cinnamon
             "konsole --workdir=${path}", // kde
-            "mate-terminal ${path}", // mate
-            "gnome-terminal ${path}", // cinnamon
+            "mate-terminal --working-directory=${path}", // mate
             "lxterminal --working-directory=${path}" // lxde
         )
     ),
